@@ -120,6 +120,32 @@ const App = () => {
         {/* Results Display */}
         {result && !loading && (
           <div className="space-y-8 animate-fade-in">
+            {/* Success Message */}
+            <div className="bg-green-50 border-l-4 border-green-400 p-6 rounded-r-xl">
+              <div className="flex items-center">
+                <div className="flex-shrink-0">
+                  <svg
+                    className="h-6 w-6 text-green-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </div>
+                <div className="ml-3">
+                  <p className="text-sm text-green-700">
+                    🎉 Success! Your vocabulary content has been generated. Use
+                    the "Read" buttons to hear the explanations aloud!
+                  </p>
+                </div>
+              </div>
+            </div>
             {/* Word Explanations Section */}
             <section>
               <div className="flex items-center gap-3 mb-6">
@@ -159,33 +185,6 @@ const App = () => {
                 <StoryCard story={result.story} />
               </section>
             )}
-
-            {/* Success Message */}
-            <div className="bg-green-50 border-l-4 border-green-400 p-6 rounded-r-xl">
-              <div className="flex items-center">
-                <div className="flex-shrink-0">
-                  <svg
-                    className="h-6 w-6 text-green-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </div>
-                <div className="ml-3">
-                  <p className="text-sm text-green-700">
-                    🎉 Success! Your vocabulary content has been generated. Use
-                    the "Read" buttons to hear the explanations aloud!
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
         )}
 

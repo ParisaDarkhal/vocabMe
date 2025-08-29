@@ -349,14 +349,14 @@ const WordForm = ({ onSubmit, loading }) => {
         {/* Progress indicator */}
         {(wordCount > 0 || age !== 9) && (
           <div className="mt-6 animate-fade-in">
-            <div className="flex items-center justify-between text-sm text-gray-600 mb-2">
+            {/* <div className="flex items-center justify-between text-sm text-gray-600 mb-2">
               <span className="font-medium">Ready to generate</span>
               <span className="text-xs bg-gray-100 px-2 py-1 rounded-full">
                 {wordCount > 0 && age ? '100%' : wordCount > 0 ? '90%' : '50%'}{' '}
                 complete
               </span>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+            </div> */}
+            {/* <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
               <div
                 className={`h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-700 ease-out ${
                   wordCount > 0 && age
@@ -366,7 +366,7 @@ const WordForm = ({ onSubmit, loading }) => {
                     : 'w-1/2'
                 }`}
               ></div>
-            </div>
+            </div> */}
           </div>
         )}
       </div>
