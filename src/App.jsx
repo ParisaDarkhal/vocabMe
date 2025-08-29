@@ -251,9 +251,19 @@ const App = () => {
         <footer className="mt-12 text-center text-gray-500 text-sm">
           <div className="flex items-center justify-center gap-2 mb-2">
             <BookOpen size={16} />
-            <span>Powered by OpenAI GPT-4o-mini</span>
+            <span>Powered by GPT-4o</span>
           </div>
-          <p>Created with ❤️ for learners everywhere</p>
+          <p>
+            Created by{' '}
+            <a
+              className="text-blue-600"
+              href="https://parisadarkhal.github.io/React-Portfolio/"
+              target="blank"
+            >
+              Parisa
+            </a>{' '}
+            with ❤️ for learners everywhere
+          </p>
         </footer>
       </div>
     </div>
