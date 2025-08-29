@@ -132,7 +132,7 @@ const App = () => {
                 <div className="flex-1 h-px bg-gradient-to-r from-blue-200 to-transparent"></div>
               </div>
 
-              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-1">
                 {result.explanations.map((explanation, index) => (
                   <div
                     key={index}
