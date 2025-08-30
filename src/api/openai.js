@@ -29,7 +29,7 @@ Please provide a JSON response with this exact structure:
       "realWorld": "A real-world example of where/how they might encounter this word"
     }
   ],
-  "story": "Create an engaging, imaginative story (5-10 sentences) that naturally incorporates ALL the vocabulary words. Make it fun, age-appropriate, and educational for a ${age}-year-old. The story should be adventurous or magical to capture their interest."
+  "story": "Create an engaging, imaginative story of realistic fiction (5-10 sentences) that naturally incorporates ALL the vocabulary words. Make it fun, age-appropriate, and educational for a ${age}-year-old. The story should be adventurous or video game inspired to capture their interest."
 }
 
 Guidelines:
