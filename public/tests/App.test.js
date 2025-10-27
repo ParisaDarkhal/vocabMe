@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
@@ -6,7 +5,7 @@ import App from '../src/App';
 
 // Mock the OpenAI API
 jest.mock('../src/api/openai', () => ({
-  callOpenAI: jest.fn()
+  callOpenAI: jest.fn(),
 }));
 
 import { callOpenAI } from '../src/api/openai';
@@ -23,17 +22,23 @@ describe('App Component', () => {
 
   test('renders the form elements', () => {
     render(<App />);
-    expect(screen.getByPlaceholderText(/e.g., afford, loan, profit/)).toBeInTheDocument();
+    expect(
+      screen.getByPlaceholderText(/e.g., afford, loan, profit/)
+    ).toBeInTheDocument();
     expect(screen.getByDisplayValue('9 years old')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /Generate Explanations & Story/ })).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: /Generate Explanations & Story/ })
+    ).toBeInTheDocument();
   });
 
   test('shows error when submitting empty form', async () => {
     render(<App />);
-    const submitButton = screen.getByRole('button', { name: /Generate Explanations & Story/ });
-    
+    const submitButton = screen.getByRole('button', {
+      name: /Generate Explanations & Story/,
+    });
+
     fireEvent.click(submitButton);
-    
+
     expect(screen.getByText('Please enter some words')).toBeInTheDocument();
   });
 
@@ -44,18 +49,20 @@ describe('App Component', () => {
           word: 'test',
           definition: 'A way to check if something works',
           example: 'We took a test at school today.',
-          realWorld: 'You take tests to see what you learned.'
-        }
+        },
       ],
-      story: 'Once upon a time, there was a magical test that helped children learn new things!'
+      story:
+        'Once upon a time, there was a magical test that helped children learn new things!',
     };
 
     callOpenAI.mockResolvedValueOnce(mockResponse);
 
     render(<App />);
-    
+
     const wordInput = screen.getByPlaceholderText(/e.g., afford, loan, profit/);
-    const submitButton = screen.getByRole('button', { name: /Generate Explanations & Story/ });
+    const submitButton = screen.getByRole('button', {
+      name: /Generate Explanations & Story/,
+    });
 
     fireEvent.change(wordInput, { target: { value: 'test' } });
     fireEvent.click(submitButton);
@@ -65,7 +72,9 @@ describe('App Component', () => {
     });
 
     expect(screen.getByText('test')).toBeInTheDocument();
-    expect(screen.getByText('A way to check if something works')).toBeInTheDocument();
+    expect(
+      screen.getByText('A way to check if something works')
+    ).toBeInTheDocument();
     expect(screen.getByText(/Once upon a time/)).toBeInTheDocument();
   });
 
@@ -73,15 +82,19 @@ describe('App Component', () => {
     callOpenAI.mockRejectedValueOnce(new Error('API Error'));
 
     render(<App />);
-    
+
     const wordInput = screen.getByPlaceholderText(/e.g., afford, loan, profit/);
-    const submitButton = screen.getByRole('button', { name: /Generate Explanations & Story/ });
+    const submitButton = screen.getByRole('button', {
+      name: /Generate Explanations & Story/,
+    });
 
     fireEvent.change(wordInput, { target: { value: 'test' } });
     fireEvent.click(submitButton);
 
     await waitFor(() => {
-      expect(screen.getByText(/Failed to generate explanations/)).toBeInTheDocument();
+      expect(
+        screen.getByText(/Failed to generate explanations/)
+      ).toBeInTheDocument();
     });
   });
 });
@@ -99,7 +112,10 @@ const WordForm = ({ onSubmit, loading }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (words.trim()) {
-      const wordList = words.split(',').map(w => w.trim()).filter(w => w.length > 0);
+      const wordList = words
+        .split(',')
+        .map((w) => w.trim())
+        .filter((w) => w.length > 0);
       onSubmit(wordList, age);
     }
   };
@@ -135,7 +151,7 @@ describe('WordForm Component', () => {
   test('renders input fields', () => {
     const mockSubmit = jest.fn();
     render(<WordForm onSubmit={mockSubmit} loading={false} />);
-    
+
     expect(screen.getByTestId('word-input')).toBeInTheDocument();
     expect(screen.getByTestId('age-select')).toBeInTheDocument();
   });
@@ -143,7 +159,7 @@ describe('WordForm Component', () => {
   test('calls onSubmit with correct data', () => {
     const mockSubmit = jest.fn();
     render(<WordForm onSubmit={mockSubmit} loading={false} />);
-    
+
     const wordInput = screen.getByTestId('word-input');
     const submitButton = screen.getByText('Submit');
 
@@ -156,7 +172,7 @@ describe('WordForm Component', () => {
   test('shows loading state', () => {
     const mockSubmit = jest.fn();
     render(<WordForm onSubmit={mockSubmit} loading={true} />);
-    
+
     expect(screen.getByText('Loading...')).toBeInTheDocument();
     expect(screen.getByText('Loading...')).toBeDisabled();
   });
@@ -164,7 +180,7 @@ describe('WordForm Component', () => {
   test('handles age selection', () => {
     const mockSubmit = jest.fn();
     render(<WordForm onSubmit={mockSubmit} loading={false} />);
-    
+
     const ageSelect = screen.getByTestId('age-select');
     const wordInput = screen.getByTestId('word-input');
     const submitButton = screen.getByText('Submit');
@@ -198,25 +214,35 @@ describe('OpenAI API Service', () => {
 
   test('throws error when API key is missing', async () => {
     delete process.env.REACT_APP_OPENAI_API_KEY;
-    
-    await expect(callOpenAI(['test'], 10)).rejects.toThrow('OpenAI API key not found');
+
+    await expect(callOpenAI(['test'], 10)).rejects.toThrow(
+      'OpenAI API key not found'
+    );
   });
 
   test('makes correct API call', async () => {
     const mockResponse = {
-      choices: [{
-        message: {
-          content: JSON.stringify({
-            explanations: [{ word: 'test', definition: 'def', example: 'ex', realWorld: 'real' }],
-            story: 'A test story'
-          })
-        }
-      }]
+      choices: [
+        {
+          message: {
+            content: JSON.stringify({
+              explanations: [
+                {
+                  word: 'test',
+                  definition: 'def',
+                  example: 'ex',
+                },
+              ],
+              story: 'A test story',
+            }),
+          },
+        },
+      ],
     };
 
     fetch.mockResolvedValueOnce({
       ok: true,
-      json: () => Promise.resolve(mockResponse)
+      json: () => Promise.resolve(mockResponse),
     });
 
     const result = await callOpenAI(['test'], 10);
@@ -227,8 +253,8 @@ describe('OpenAI API Service', () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer sk-test-key-12345678901234567890'
-        }
+          Authorization: 'Bearer sk-test-key-12345678901234567890',
+        },
       })
     );
 
@@ -240,9 +266,11 @@ describe('OpenAI API Service', () => {
     fetch.mockResolvedValueOnce({
       ok: false,
       status: 401,
-      json: () => Promise.resolve({ error: { message: 'Invalid API key' } })
+      json: () => Promise.resolve({ error: { message: 'Invalid API key' } }),
     });
 
-    await expect(callOpenAI(['test'], 10)).rejects.toThrow('OpenAI API error: 401 - Invalid API key');
+    await expect(callOpenAI(['test'], 10)).rejects.toThrow(
+      'OpenAI API error: 401 - Invalid API key'
+    );
   });
 });

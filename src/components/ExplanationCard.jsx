@@ -26,12 +26,12 @@ const ExplanationCard = ({ explanation }) => {
           <p className="text-gray-600 italic">"{explanation.example}"</p>
         </div>
 
-        <div>
+        {/* <div>
           <h4 className="font-semibold text-gray-700 mb-1">
             Real-world example:
           </h4>
           <p className="text-gray-600">{explanation.realWorld}</p>
-        </div>
+        </div> */}
       </div>
     </div>
   );
