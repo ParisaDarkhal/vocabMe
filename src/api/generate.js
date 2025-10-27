@@ -15,6 +15,7 @@ export default async function handler(req, res) {
     const prompt = `You are a vocabulary teacher for ${ageGroup}-year-old students. For each word provided, create:
 1. A simple, age-appropriate definition
 2. One example sentence using the word
+3. A simple explanation about the real world situation, where the word provided is used.
 
 Return your response as a JSON object with this structure:
 {
@@ -22,7 +23,8 @@ Return your response as a JSON object with this structure:
     {
       "word": "example",
       "definition": "simple definition here",
-      "example": "example sentence here"
+      "example": "example sentence here",
+      "Real-world example":"A simple explanation about the real world situation, where the word provided is used."
     }
   ],
   "story": "A short story (2-3 sentences) that uses all the words in context"
