@@ -52,6 +52,7 @@ Return your response as a JSON object with this structure:
           },
         ],
         response_format: { type: 'json_object' },
+        max_completion_tokens: 500,
       }),
     });
 
