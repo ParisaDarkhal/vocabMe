@@ -2,7 +2,7 @@ import React from 'react';
 import TextToSpeechButton from './TextToSpeechButton';
 
 const ExplanationCard = ({ explanation }) => {
-  const fullText = `${explanation.word}. ${explanation.definition} ${explanation.example} ${explanation.realWorld}`;
+  const fullText = `${explanation.word}. ${explanation.definition} ${explanation.example} `;
 
   return (
     <div className="bg-white rounded-xl shadow-md p-6 border border-gray-100 animate-slide-up">
@@ -25,13 +25,6 @@ const ExplanationCard = ({ explanation }) => {
           </h4>
           <p className="text-gray-600 italic">"{explanation.example}"</p>
         </div>
-
-        {/* <div>
-          <h4 className="font-semibold text-gray-700 mb-1">
-            Real-world example:
-          </h4>
-          <p className="text-gray-600">{explanation.realWorld}</p>
-        </div> */}
       </div>
     </div>
   );
